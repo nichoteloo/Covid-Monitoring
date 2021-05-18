@@ -1,0 +1,119 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style></style>
+    <title>Covid Cases</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <form action="/chart" method="GET" id="createChart">
+        <div class="form-group">
+          <h2>Country</h2>
+          <select name="country" class="form-control">
+            <option value="None" selected>Open this to select country</option>
+            {{countriesOptions}}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <h2>Data Type</h2>
+          <select name="dataType" class="form-control">
+            <option value="None" selected>Open this to select data type</option>
+            <option value="Confirmed">New Cases</option>
+            <option value="Deaths">Deaths</option>
+            <option value="Recovered">Recovered</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" id="btnFetch" class="btn btn-dark">
+            Generates Graph
+          </button>
+        </div>
+      </form>
+
+      <div class="row justify-content-center">
+        <div class="col-md-3">
+          <div class="card bg-light mb-3" style="width: 15rem">
+            <div
+              class="card-header"
+              style="background-color: #007bff; color: white"
+            >
+              Total Cases:
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <h3
+                id="totalCasesValue"
+                onchange="changeCounterValue()"
+                class="card-text"
+              >
+                {{ totalCases }}
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card bg-light mb-3" style="width: 15rem">
+            <div
+              class="card-header"
+              style="background-color: #007bff; color: white"
+            >
+              Total Death
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <h3
+                id="totalDeathsValue"
+                onchange="changeCounterValue()"
+                class="card-text"
+              >
+                {{ totalDeaths }}
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card bg-light mb-3" style="width: 15rem">
+            <div
+              class="card-header"
+              style="background-color: #007bff; color: white"
+            >
+              Total Recovered
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <h3
+                id="totalDeathsValue"
+                onchange="changeCounterValue()"
+                class="card-text"
+              >
+                {{ totalRecovered }}
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
