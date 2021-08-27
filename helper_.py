@@ -1,8 +1,10 @@
 import urls
 import yaml
+import plotly
 import requests
 import mysql.connector
 from flask import Markup
+from plotly.graph_objs import Scatter, Layout
 
 db = yaml.safe_load(open("config/" + 'db.yaml'))
 
@@ -62,6 +64,19 @@ def countrySummary():
 		print(cur.rowcount, "record affected.")
 	mydb.close()
 
+## Get Country Summary
+def getSummary(country):
+	mydb = MySQLConnect()
+	cur = mydb.cursor()
+
+	query = "SELECT TotalConfirmed,TotalDeaths,TotalRecovered FROM dailysummary WHERE Country=(%s);"
+	cur.execute(query,(country,))
+
+	summary = cur.fetchall()
+	mydb.close()
+	
+	return summary
+
 ## Get All Countries
 def getCountries():
     mydb = MySQLConnect()
@@ -95,10 +110,40 @@ def getSlugCountry(country):
 
 	return slug
 
-## Save Current 
+## Prepare Data Plotting
+def preparePlotting(queryList, plotType):
+	dataDictionary = {
+		"X": [],
+		"Y": [],
+	}
+	if (plotType == "incremental"):
+		for x in queryList:
+			dataDictionary["X"].append(x[0])
+			dataDictionary["Y"].append(x[1])
+	elif (plotType == "daily"):
+		previousDay = ""
+		for x in queryList:
+			if (previousDay != ""):
+				dataDictionary["X"].append(x[0] - previousDay[0])
+			else:
+				dataDictionary["X"].append(x[0])
+			dataDictionary["Y"].append(x[1])
+			previousDay = x
+	return dataDictionary
+
+def examplePlot():
+    plotly.offline.plot({
+        "data": [Scatter(x=[1, 2, 3, 4], y=[4, 3, 2, 1])],
+        "layout": Layout(title="hello world")
+    })
 
 ##########################################################
 
-# if __name__ == '__main__':
-	# allCountry()
-	# countrySummary()
+if __name__ == '__main__':
+	#3 allCountry()
+	## countrySummary()
+
+	# summary = getSummary('Japan')
+	# print(summary)
+
+	# examplePlot()
