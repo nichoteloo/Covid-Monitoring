@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       * {
-        margin: 20px 20px;
+        margin: 20px 30px;
       }
     </style>
     <title>Covid Monitoring</title>
@@ -69,7 +69,7 @@
     </script>
   </head>
   <body>
-    <div class="container">
+    <div class="container-flex">
       <form action="/chart" method="GET" id="createChart">
         <div class="form-group">
           <h2>Country</h2>
@@ -98,10 +98,10 @@
 
       <div class="row justify-content-center">
         <div class="col-md-3">
-          <div class="card bg-light mb-3" style="width: 15rem">
+          <div class="card bg-light mb-3" style="width: 18rem">
             <div
               class="card-header"
-              style="background-color: #007bff; color: white"
+              style="background-color: #17283b; color: white"
             >
               Total Cases:
             </div>
@@ -118,10 +118,10 @@
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card bg-light mb-3" style="width: 15rem">
+          <div class="card bg-light mb-3" style="width: 18rem">
             <div
               class="card-header"
-              style="background-color: #007bff; color: white"
+              style="background-color: #17283b; color: white"
             >
               Total Death
             </div>
@@ -138,10 +138,10 @@
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card bg-light mb-3" style="width: 15rem">
+          <div class="card bg-light mb-3" style="width: 18rem">
             <div
               class="card-header"
-              style="background-color: #007bff; color: white"
+              style="background-color: #17283b; color: white"
             >
               Total Recovered
             </div>
@@ -157,8 +157,8 @@
             </div>
           </div>
         </div>
-        <div id="resultChart"></div>
       </div>
+      <div id="dailyCasesDiv">{{ dailyCasesPlot }}</div>
     </div>
   </body>
 </html>

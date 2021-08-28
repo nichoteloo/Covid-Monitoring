@@ -1,0 +1,6 @@
+config/
+screenshot/
+venv/
+.git
+.cache
+*.md
