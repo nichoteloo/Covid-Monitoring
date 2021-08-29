@@ -1,5 +1,5 @@
 import helper
-from helper_ import callApi, MySQLConnect
+from helper.helper_ import callApi, MySQLConnect
 
 ## Inject Country for Once	
 def allCountry():
@@ -40,7 +40,3 @@ def countrySummary():
 		mydb.commit()
 		print(cur.rowcount, "record affected.")
 	mydb.close()
-
-# if __name__ == '__main__':
-# 	allCountry()
-# 	countrySummary()

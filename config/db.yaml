@@ -1,0 +1,5 @@
+mysql_host: "mysql"
+mysql_port: "3306"
+mysql_user: "root"
+mysql_password: "root"
+mysql_db: "covid"

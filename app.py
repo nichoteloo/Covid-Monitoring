@@ -54,6 +54,3 @@ def chart():
 		optionHTML = getOptionCountries()
 
 	return render_template('/index.html', dailyCasesPlot=dailyCasesPlotHtml, totalCases = totalConfirmed, totalDeaths = totalDeaths, totalRecovered = totalRecovered, countriesOptions=optionHTML)
-
-if __name__ == '__main__':
-	app.run(host='0.0.0.0')

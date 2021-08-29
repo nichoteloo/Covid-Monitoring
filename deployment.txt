@@ -1,0 +1,55 @@
+This text contain command for microservice deployment.
+Docker-compose is not involved but using manually setup service instead.
+
+Step #1
+## get mariadb image from docker hub, then run in background (daemon)
+docker run --name db -e MYSQL_ROOT_PASSWORD=root -d -p 33067:3306 mariadb
+
+Step #2
+## interacting with database with another node running (mysql-client)
+## --rm will remove after container stop, -it is interactive terminal, access node externally with 'mysql' keyword
+docker run --name mysql-client -it --link db:mysql --rm mariadb sh -c 'exec mysql -uroot -proot -hmysql'
+
+Step #3
+## run SQL command within MariaDB command line, created database named 'covid'
+## build table, script is available on config/covid-v1.sql
+## check for the database availability
+
+Step #4
+## build image and run flask app, Dockerfile available
+## from the top-parent directory, run;
+docker build -t covid-monitoring-v1 .
+
+Step #5
+docker run -id -p 5000:5000 -v /home/nichotelo/Desktop/Covid-Monitoring:/app --name covid-v1 --link db:mysql covid-v1 bash
+## -v means every file changes in local directory will change the file in /app cocurrently.
+## --link means like depends_on in docker compose, or at least make two nodes comunicate each other
+## bash means waiting for any scripting within the service.
+
+Step #6
+## jump in to service's shell
+docker exec -it covid-v1 shell
+
+Step #7
+## inject data from API to database, for initialization.
+## from /app directory run
+python init.py
+## make sure that your config yaml is right
+
+Step #8
+## check for data availability in table 'countries' and 'dailysummary'
+## from /app directory run
+gunicorn main:app
+## check the app in your browser with the given ip and port.
+
+Step #9
+## stop the runnig container (if you want to) with
+docker stop {containerID}
+## prune all container
+docker container prune 
+
+
+
+
+
+

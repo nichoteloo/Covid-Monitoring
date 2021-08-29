@@ -1,4 +1,3 @@
-# import urls
 import yaml
 import helper
 import plotly
