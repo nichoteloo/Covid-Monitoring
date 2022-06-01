@@ -2,7 +2,7 @@
 
 ## Flask MySQL interconnection
 
-## Command for microservice deployment is documented in deployment.txt
+Command for microservice deployment is documented in deployment.txt
 
 #### Simple UI Design
 
