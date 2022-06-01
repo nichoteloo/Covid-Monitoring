@@ -1,4 +1,4 @@
-# Run Covid Monitorin Dashboard in Microservices
+# Run Covid Monitoring Dashboard in Microservices
 
 ## Flask MySQL interconnection
 
